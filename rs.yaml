@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+   name: myrs
+spec:
+   replicas: 3
+   selector:
+     matchExpressions:
+      - key: app
+        operator: In
+        values: [myapp]
+   template:
+      metadata:
+        labels:
+          app: myapp
+      spec:
+        containers:
+        - name: con1
+          image: httpd:latest
+          ports:
+          - containerPort: 80
+        - name: con2
+          image: tomcat:latest
+          ports:
+          - containerPort: 8080
+
